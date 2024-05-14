@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AccountsUser {
+  id         String   @id @default(uuid())
+  firebaseId String   @unique @map("firebase_id")
+  email      String   @unique
+  type       UserType
+
+  company   Company? @relation(fields: [companyId], references: [id])
+  companyId String?  @map("company_id")
+
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
+
+  @@map("accounts_users")
+}
+
+model Company {
+  id     String  @id @default(uuid())
+  userId String? @unique @map("user_id")
+
+  name         String
+  description  String
+  profileImage String @map("profile_image")
+  phone        String
+
+  city    String
+  state   String
+  country String
+
+  user AccountsUser[]
+
+  @@map("companies")
+}
+
+model User {
+  id           String           @id @default(uuid())
+  userId       String?          @unique @map("user_id")
+  name         String
+  age          Int
+  phone        String
+  city         String
+  state        String
+  country      String
+  applications JobApplication[]
+  AccountsUser AccountsUser[]
+
+  @@map("users")
+}
+
+model JobVacancy {
+  id           String           @id @default(uuid())
+  ownerId      String           @unique @map("owner_id")
+  position     String
+  description  String
+  positionType String           @map("position_type")
+  externalLink String           @map("external_link")
+  vacancyType  String           @map("vacancy_type")
+  salaryRange  String           @map("salary_range")
+  applications JobApplication[]
+
+  @@map("job_vacancies")
+}
+
+model JobApplication {
+  id        String     @id @default(uuid())
+  userId    String
+  vacancyId String
+  user      User       @relation(fields: [userId], references: [id])
+  vacancy   JobVacancy @relation(fields: [vacancyId], references: [id])
+
+  @@map("job_applications")
+}
+
+enum UserType {
+  COMPANY
+  COMMON
+  RECRUITER
+}
