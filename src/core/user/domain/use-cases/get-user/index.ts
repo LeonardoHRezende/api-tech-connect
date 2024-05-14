@@ -6,8 +6,7 @@ export class GetUserUseCase {
   async execute(id: string) {
     try {
       const user = await this.userRepository.getUser(id);
-
-      console.log(user);
+      
       return user;
     }
     catch (err) {

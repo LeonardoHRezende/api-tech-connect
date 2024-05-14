@@ -78,7 +78,11 @@ export class AccountUserRepositoryPrisma implements AccountUserRepository {
               phone: user.userInformations.phone,
               city: user.userInformations.city,
               state: user.userInformations.state,
-              country: user.userInformations.country
+              country: user.userInformations.country,
+              position: user.userInformations.position,
+              seniority: user.userInformations.seniority,
+              bio: user.userInformations.bio,
+              profileImage: user.userInformations.profileImage
             }
           }
         },
