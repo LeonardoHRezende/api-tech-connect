@@ -1,9 +1,14 @@
-import { userType } from "../../repositories/user-repository";
+import { randomUUID } from "crypto";
+import { UserProps } from "../../repositories/account-user-repository";
 
-export class AccountsUserEntity {
-  constructor(private _props: AccountUserProps) { }
+export class UserEntity {
+  constructor(private _props: UserProps) { }
 
   get id() {
+    if (!this._props.id) {
+      return randomUUID();
+    }
+
     return this._props.id;
   }
 
@@ -19,19 +24,31 @@ export class AccountsUserEntity {
     return this._props.type;
   }
 
+  get createdAt() {
+    if (!this._props.createdAt) {
+      return new Date();
+    }
+    return this._props.createdAt;
+  }
+
+  get updatedAt() {
+    if (!this._props.updatedAt) {
+      return new Date();
+    }
+    return this._props.updatedAt;
+  }
+
+  get userInformations() {
+    return this._props.userInformations;
+  }
+
   toJSON() {
     return {
       id: this.id,
       firebaseId: this.firebaseId,
       email: this.email,
       type: this.type,
+      userInformations: this._props.userInformations
     };
   }
-}
-
-interface AccountUserProps {
-  id: string;
-  firebaseId: string;
-  email: string;
-  type: userType;
 }
