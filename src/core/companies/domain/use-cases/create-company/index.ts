@@ -1,7 +1,6 @@
 import { CompanyEntity } from "@tech-connect/core/shared/entities/companies/company";
 import { CompaniesRepository, companyProps } from "@tech-connect/core/shared/repositories/companies-repository";
 
-
 export class CreateCompanyUseCase {
   constructor(private readonly companyRepository: CompaniesRepository) { }
 
