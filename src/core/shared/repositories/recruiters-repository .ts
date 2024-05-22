@@ -16,7 +16,7 @@ export interface RecruiterProps {
   type: UserType;
   createdAt?: Date;
   updatedAt?: Date;
-  recruiterInformations: recruiterInformations;
+  recruiterInformations?: recruiterInformations;
 }
 
 export interface recruiterInformations {

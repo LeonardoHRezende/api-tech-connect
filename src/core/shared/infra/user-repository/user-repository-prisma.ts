@@ -13,24 +13,6 @@ export class AccountUserRepositoryPrisma implements AccountUserRepository {
           firebaseId: user.firebaseId,
           email: user.email,
           type: user.type,
-          userInformations: {
-            create: {
-              userId: user.userInformations.userId,
-              name: user.userInformations.name,
-              age: user.userInformations.age,
-              phone: user.userInformations.phone,
-              city: user.userInformations.city,
-              state: user.userInformations.state,
-              country: user.userInformations.country,
-              position: user.userInformations.position,
-              seniority: user.userInformations.seniority,
-              bio: user.userInformations.bio,
-              profileImage: user.userInformations.profileImage
-            }
-          }
-        },
-        include: {
-          userInformations: true
         }
       });
     }

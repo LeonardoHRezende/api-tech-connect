@@ -16,7 +16,7 @@ export interface companyProps {
   type: UserType;
   createdAt?: Date;
   updatedAt?: Date;
-  companyInformations: companyInformations;
+  companyInformations?: companyInformations;
 }
 
 export interface companyInformations {

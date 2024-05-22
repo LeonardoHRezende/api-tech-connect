@@ -71,6 +71,7 @@ export class JobVacancyPrismaRepository implements JobVacancyRepository {
       new InternalServerErrorException(error)
     }
   }
+
   async findById(id: string): Promise<JobVacancyEntity> {
     try {
       const jobVacancy = await prisma.jobVacancy.findUnique({
@@ -102,6 +103,7 @@ export class JobVacancyPrismaRepository implements JobVacancyRepository {
       new InternalServerErrorException(error)
     }
   }
+  
   async findAll(page: number): Promise<JobVacancyEntity[]> {
     try {
       const jobVacancies = await prisma.jobVacancy.findMany({

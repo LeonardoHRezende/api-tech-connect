@@ -12,22 +12,7 @@ export class CompaniesRepositoryPrisma implements CompaniesRepository {
         data: {
           firebaseId: company.firebaseId,
           email: company.email,
-          type: company.type,
-          companyInformations: {
-            create: {
-              userId: company.companyInformations.userId,
-              name: company.companyInformations.name,
-              phone: company.companyInformations.phone,
-              city: company.companyInformations.city,
-              state: company.companyInformations.state,
-              country: company.companyInformations.country,
-              profileImage: company.companyInformations.profileImage,
-              description: company.companyInformations.description
-            }
-          }
-        },
-        include: {
-          companyInformations: true
+          type: company.type
         }
       });
     }

@@ -14,21 +14,6 @@ export class RecruiterRepositoryPrisma implements RecruitersRepository {
           firebaseId: recruiter.firebaseId,
           email: recruiter.email,
           type: recruiter.type,
-          recruiterInformations: {
-            create: {
-              userId: recruiter.recruiterInformations.userId,
-              name: recruiter.recruiterInformations.name,
-              age: recruiter.recruiterInformations.age,
-              phone: recruiter.recruiterInformations.phone,
-              city: recruiter.recruiterInformations.city,
-              state: recruiter.recruiterInformations.state,
-              country: recruiter.recruiterInformations.country,
-              profileImage: recruiter.recruiterInformations.profileImage
-            }
-          }
-        },
-        include: {
-          recruiterInformations: true
         }
       });
     }

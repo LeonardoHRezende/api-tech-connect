@@ -1,6 +1,8 @@
 import { randomUUID } from "crypto";
 import { UserProps } from "../../repositories/account-user-repository";
+import { Injectable } from "@nestjs/common";
 
+@Injectable()
 export class UserEntity {
   constructor(private _props: UserProps) { }
 

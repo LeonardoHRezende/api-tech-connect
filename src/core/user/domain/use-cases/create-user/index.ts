@@ -1,6 +1,8 @@
+import { Injectable } from "@nestjs/common";
 import { UserEntity } from "@tech-connect/core/shared/entities/users/users";
 import { AccountUserRepository, UserProps } from "@tech-connect/core/shared/repositories/account-user-repository";
 
+@Injectable()
 export class CreateUserUseCase {
   constructor(private readonly userRepository: AccountUserRepository) { }
 
