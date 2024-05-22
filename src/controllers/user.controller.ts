@@ -18,7 +18,7 @@ export class UserController {
     private readonly userService: UserService,
   ) { }
 
-  @Post('create')
+  @Post('')
   async createUser(@Body() user: UserInput, @Res() res: any) {
     try {
       await this.userService.createUser(user);
@@ -29,7 +29,7 @@ export class UserController {
     }
   }
 
-  @Get('get/:firebaseId')
+  @Get(':firebaseId')
   async getUser(@Param('firebaseId') firebaseId: string, @Res() res: any) {
     try {
       const user = await this.userService.getUser(firebaseId);
@@ -40,12 +40,12 @@ export class UserController {
     }
   }
 
-  @Put('update')
+  @Put('')
   async updateUser(@Body() user: UserInput, @Res() res: any) {
     try {
       await this.userService.updateUser(user);
       return res.status(HttpStatus.OK).send();
-    }
+    }       
     catch (err) {
       return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
     }
