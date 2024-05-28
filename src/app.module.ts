@@ -31,7 +31,7 @@ export class AppModule {
       .apply(AuthMiddleware)
       .exclude(
         {
-          path: '/users',
+          path: '/user',
           method: RequestMethod.POST,
         },
       )

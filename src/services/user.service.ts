@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreateCompanyUseCase } from '@tech-connect/core/companies/domain/use-cases/create-company';
 import { GetCompanyUseCase } from '@tech-connect/core/companies/domain/use-cases/get-company';
 import { UpdateCompanyUseCase } from '@tech-connect/core/companies/domain/use-cases/update-company';
@@ -30,26 +30,26 @@ export class UserService {
     switch (userInput.type) {
       case 'RECRUITER':
         try {
-          await createRecruiterUseCase.execute(userInput);
+          return await createRecruiterUseCase.execute(userInput);
         }
         catch (err) {
-          console.log(err);
+          return new InternalServerErrorException(err.message);
         }
         break;
       case 'COMPANY':
         try {
-          await createCompanyUseCase.execute(userInput);
+          return await createCompanyUseCase.execute(userInput);
         }
         catch (err) {
-          console.log(err);
+          return new InternalServerErrorException(err.message);
         }
         break;
       default:
         try {
-          await createUserUseCase.execute(userInput);
+          return await createUserUseCase.execute(userInput);
         }
         catch (err) {
-          console.log(err);
+          return new InternalServerErrorException(err.message);
         }
         break;
     }

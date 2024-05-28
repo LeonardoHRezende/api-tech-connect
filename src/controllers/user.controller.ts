@@ -21,10 +21,16 @@ export class UserController {
   @Post('')
   async createUser(@Body() user: UserInput, @Res() res: any) {
     try {
-      await this.userService.createUser(user);
+      const createdUser = await this.userService.createUser(user);
+
+      if(!createdUser) {
+        return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
+      }
+
       return res.status(HttpStatus.CREATED).send();
     }
     catch (err) {
+      console.log(err);
       return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err);
     }
   }

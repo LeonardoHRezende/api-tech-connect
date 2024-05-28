@@ -6,15 +6,17 @@ import { prisma } from '@tech-connect/core/db';
 @Injectable()
 export class AccountUserRepositoryPrisma implements AccountUserRepository {
 
-  async createUser(user: UserEntity): Promise<void> {
+  async createUser(user: UserEntity): Promise<{ id: string }> {
     try {
-      await prisma.accountsUser.create({
+      const createdUser = await prisma.accountsUser.create({
         data: {
           firebaseId: user.firebaseId,
           email: user.email,
           type: user.type,
         }
       });
+
+      return { id: createdUser.id };
     }
     catch (err) {
       throw new InternalServerErrorException(err.message);
@@ -43,9 +45,9 @@ export class AccountUserRepositoryPrisma implements AccountUserRepository {
     }
   }
 
-  async updateUser(user: UserEntity): Promise<void> {
+  async updateUser(user: UserEntity): Promise<{ id: string }> {
     try {
-      await prisma.accountsUser.update({
+      const updatedUser = await prisma.accountsUser.update({
         where: {
           firebaseId: user.firebaseId
         },
@@ -72,6 +74,8 @@ export class AccountUserRepositoryPrisma implements AccountUserRepository {
           userInformations: true
         }
       });
+
+      return { id: updatedUser.id };
     }
     catch (err) {
       throw new InternalServerErrorException(err.message);

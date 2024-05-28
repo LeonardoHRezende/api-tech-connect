@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, InternalServerErrorException } from "@nestjs/common";
 import { UserEntity } from "@tech-connect/core/shared/entities/users/users";
 import { AccountUserRepository, UserProps } from "@tech-connect/core/shared/repositories/account-user-repository";
 
@@ -8,14 +8,14 @@ export class CreateUserUseCase {
 
   async execute(user: UserProps) {
     try {
-      const createdUser = new UserEntity(user);
+      const userEntity = new UserEntity(user);
 
-      await this.userRepository.createUser(createdUser);
+      const createdUser = await this.userRepository.createUser(userEntity);
 
       return { userId: createdUser.id };
     }
     catch (err) {
-      console.log(err);
+      return new InternalServerErrorException(err.message);
     }
   }
 }

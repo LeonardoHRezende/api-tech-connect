@@ -3,12 +3,12 @@ import { companyInformations } from "./companies-repository";
 import { recruiterInformations } from "./recruiters-repository ";
 
 export interface AccountUserRepository {
-  createUser(user: UserEntity): Promise<void>;
+  createUser(user: UserEntity): Promise<{ id: string }>;
   getUser(id: string): Promise<UserEntity>;
-  updateUser(user: UserEntity): Promise<void>;
+  updateUser(user: UserEntity): Promise<{ id: string }>;
 }
 
-export interface UserInput{
+export interface UserInput {
   firebaseId: string;
   email: string;
   type: UserType;
@@ -23,7 +23,7 @@ export interface UserProps {
   updatedAt?: Date;
   userInformations?: userInformations;
   companyInformations?: companyInformations;
-  recruiterInformations?: recruiterInformations; 
+  recruiterInformations?: recruiterInformations;
 }
 
 export interface userInformations {
